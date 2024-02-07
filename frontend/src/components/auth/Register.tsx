@@ -1,3 +1,4 @@
+import { message } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +9,7 @@ function Register() {
     password: "",
   });
   const navigate = useNavigate();
+  const apiUrl = "http://localhost:5000";
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -17,8 +19,27 @@ function Register() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await fetch(`${apiUrl}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        message.success("Kayıt başarılı");
+        // localstorage ye kaydetme işlemi
+        const data = await response.json();
+        localStorage.setItem("user", JSON.stringify(data));
+        // anasayfaya yönledirip sayfanın en üstüne çıkartma
+        navigate("/", { replace: true });
+      } else {
+        message.error("Kayıt başarısız");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

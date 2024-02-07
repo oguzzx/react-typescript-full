@@ -1,8 +1,10 @@
+import { message } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
+  const apiUrl = "http://localhost:5000";
 
   const [formData, setFormData] = useState({
     email: "",
@@ -17,8 +19,32 @@ function Login() {
     });
   };
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    try {
+      const response = await fetch(`${apiUrl}/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("user", JSON.stringify(data));
+        message.success("Giriş başarılı.");
+        if (data.role === "admin") {
+          window.location.href = "/admin";
+        } else {
+          navigate("/");
+        }
+      } else {
+        message.error("Giriş başarısız.");
+      }
+    } catch (error) {
+      console.log("Giriş hatası:", error);
+    }
   };
   return (
     <div className="account-column">
