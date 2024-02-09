@@ -36,7 +36,7 @@ function AdminUpdateCategoryPage() {
   };
 
   // ürün bilgilerini güncelleme
-  const onFinish = async (values) => {
+const onFinish = async (values: { [key: string]: string }) => {
     setLoading(true);
     try {
       setTimeout(async () => {
@@ -74,7 +74,7 @@ function AdminUpdateCategoryPage() {
         height: "100vh",
       }}
     >
-      <Form
+    <Form
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
@@ -82,9 +82,7 @@ function AdminUpdateCategoryPage() {
         layout="vertical"
         onFinish={onFinish}
         form={form}
-        // loading spinner
-        spinning={<Spin tip="Loading..." spinning={loading} />}
-      >
+    >
         <Form.Item
           label="Kategori Adı"
           name="name"

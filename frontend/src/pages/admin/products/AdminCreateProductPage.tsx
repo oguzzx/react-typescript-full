@@ -28,11 +28,11 @@ function AdminCreateProductPage() {
     }
   };
 
-  const onFinish = async (values) => {
+  const onFinish = async (values: any) => {
     console.log(values);
-    const img = values.img.split(",").map((item) => item.trim());
-    const color = values.colors.split("\n").map((item) => item.trim());
-    const size = values.sizes.split("\n").map((item) => item.trim());
+    const img = values.img.split(",").map((item: string) => item.trim());
+    const color = values.colors.split("\n").map((item: string) => item.trim());
+    const size = values.sizes.split("\n").map((item: string) => item.trim());
     setLoading(true);
     try {
       setTimeout(async () => {
@@ -64,7 +64,6 @@ function AdminCreateProductPage() {
       console.log("Ürün güncelleme hatası:", error);
     }
   };
-
 
   // console.log(categories);
 
@@ -192,7 +191,7 @@ function AdminCreateProductPage() {
           ]}
         >
           <Select>
-            {categories.map((category) => {
+            {categories.map((category: { _id: string; name: string }) => {
               return (
                 <Select.Option key={category._id} value={category._id}>
                   {category.name}
@@ -202,7 +201,11 @@ function AdminCreateProductPage() {
           </Select>
         </Form.Item>
 
-        <Button className="bg-blue-500 text-white" type="primary" htmlType="submit">
+        <Button
+          className="bg-blue-500 text-white"
+          type="primary"
+          htmlType="submit"
+        >
           Oluştur
         </Button>
       </Form>

@@ -12,6 +12,9 @@ import AdminUserPage from "./pages/admin/users/AdminUserPage";
 import AdminProductPage from "./pages/admin/products/AdminProductPage";
 import AdminCreateProductPage from "./pages/admin/products/AdminCreateProductPage";
 import AdminUpdateProductPage from "./pages/admin/products/AdminUpdateProductPage";
+import AdminCouponPage from "./pages/admin/coupons/AdminCouponPage";
+import AdminCreateCouponPage from "./pages/admin/coupons/AdminCreateCouponPage";
+import AdminUpdateCouponPage from "./pages/admin/coupons/AdminUpdateCouponPage";
 
 function App() {
   return (
@@ -33,6 +36,9 @@ function App() {
         <Route path="products" element={<AdminProductPage />} />
         <Route path="products/create" element={<AdminCreateProductPage />} />
         <Route path="products/update/:id" element={<AdminUpdateProductPage />} />
+        <Route path="coupons" element={<AdminCouponPage />} />
+        <Route path="coupons/create" element={<AdminCreateCouponPage />} />
+        <Route path="coupons/update/:id" element={<AdminUpdateCouponPage />} />
       </Route>
     </Routes>
   );

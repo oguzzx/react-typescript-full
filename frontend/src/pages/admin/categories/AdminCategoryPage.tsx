@@ -29,43 +29,43 @@ function AdminCategoryPage() {
   };
   console.log(categories);
 
-  const handleDelete = async (key) => {
+const handleDelete = async (key: string) => {
     try {
-      const response = await fetch(`${apiUrl}/api/categories/${key}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        message.success("Kategori silindi");
-        getCategories();
-      } else {
-        message.error("Kategori silinemedi");
-      }
+        const response = await fetch(`${apiUrl}/api/categories/${key}`, {
+            method: "DELETE",
+        });
+        if (response.ok) {
+            message.success("Kategori silindi");
+            getCategories();
+        } else {
+            message.error("Kategori silinemedi");
+        }
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
-  };
+};
 
   const columns = [
     {
-      title: "Kategori Resmi",
-      dataIndex: "image",
-      key: "image",
-      render: (text) => (
-        <img
-          src={text}
-          alt="avatar"
-          width="70"
-          style={{
-            borderRadius: "10px",
-          }}
-        />
-      ),
+        title: "Kategori Resmi",
+        dataIndex: "image",
+        key: "image",
+        render: (text: string) => (
+            <img
+                src={text}
+                alt="avatar"
+                width="70"
+                style={{
+                    borderRadius: "10px",
+                }}
+            />
+        ),
     },
     {
-      title: "Kategori Adı",
-      dataIndex: "name",
-      key: "name",
-      render: (text) => <a>{text}</a>,
+        title: "Kategori Adı",
+        dataIndex: "name",
+        key: "name",
+        render: (text: string) => <a>{text}</a>,
     },
 
     {
@@ -73,7 +73,7 @@ function AdminCategoryPage() {
       title: "Action",
       dataIndex: "action",
       key: "action",
-      render: (text, record) => (
+    render: (_: any, record: any): React.ReactNode => (
         <Space size={"middle"}>
           <Popconfirm
             title="Kategoriyi silmek istediğinize emin misiniz?"
@@ -104,17 +104,17 @@ function AdminCategoryPage() {
     },
   ];
 
-  const data = categories.map((category) => {
+const data = categories.map((category: { _id: string, name: string, img: string }) => {
     return {
-      key: category._id,
-      name: category.name,
-      image: category.img,
+        key: category._id,
+        name: category.name,
+        image: category.img,
     };
-  });
+});
 
-  useEffect(() => {
+useEffect(() => {
     getCategories();
-  }, []);
+}, []);
 
   return (
     <div>

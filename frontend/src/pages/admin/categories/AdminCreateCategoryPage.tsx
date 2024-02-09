@@ -6,7 +6,7 @@ function AdminCreateCategoryPage() {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
 
-  const onFinish = async (values) => {
+const onFinish = async (values: object) => {
     setLoading(true);
     try {
       setTimeout(async () => {

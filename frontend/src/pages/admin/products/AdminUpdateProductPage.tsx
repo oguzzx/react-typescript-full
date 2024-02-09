@@ -43,11 +43,17 @@ function AdminUpdateProductPage() {
   };
 
   // ürün bilgilerini güncelleme
-  const onFinish = async (values) => {
+  const onFinish = async (values: any) => {
     setLoading(true);
-    const img = values.img.split("\n").map((img) => img.trim());
-    const color = values.color.split("\n").map((color) => color.trim());
-    const size = values.size.split("\n").map((size) => size.trim());
+    const img: string[] = values.img
+      .split("\n")
+      .map((img: string) => img.trim());
+    const color: string[] = values.color
+      .split("\n")
+      .map((color: string) => color.trim());
+    const size: string[] = values.size
+      .split("\n")
+      .map((size: string) => size.trim());
     try {
       setTimeout(async () => {
         const response = await fetch(`${apiUrl}/api/products/${id}`, {
@@ -134,7 +140,7 @@ function AdminUpdateProductPage() {
           ]}
         >
           <Select>
-            {categories.map((category) => (
+            {(categories as { _id: string; name: string }[]).map((category) => (
               <Select.Option value={category._id} key={category._id}>
                 {category.name}
               </Select.Option>
